@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "LocalizationStudio"
+version = "0.1.0-alpha"
+description = "Professional Localization & Translation Toolkit"
+readme = "README.md"
+requires-python = ">=3.12"
+
+authors = [
+    { name = "Jean-Marc DESQUILBET" }
+]
+
+license = { text = "MIT" }
+
+dependencies = [
+    "PySide6>=6.8",
+    "qtawesome>=1.3",
+    "darkdetect>=0.8",
+    "orjson>=3.10",
+    "loguru>=0.7"
+]
+
+[tool.black]
+line-length = 100
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
