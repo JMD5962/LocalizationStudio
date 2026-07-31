@@ -12,6 +12,7 @@ from PySide6.QtWidgets import (
 from src.utils.settings import SettingsManager
 from src.version import APP_NAME, APP_VERSION
 from PySide6.QtGui import QAction
+from PySide6.QtCore import Qt
 
 from src.views.actions import ApplicationActions
 
@@ -31,6 +32,7 @@ class MainWindow(QMainWindow):
 
         self._create_actions()
         self._create_menus()
+        self._create_toolbar()
         self._create_central_widget()
         self._create_statusbar()
 
@@ -61,9 +63,12 @@ class MainWindow(QMainWindow):
         super().closeEvent(event)
 
     def _create_actions(self) -> None:
-        """Reserved for future action initialization."""
-        # Les QAction sont déjà créées par ApplicationActions.
-        pass
+        """Register application actions with the main window."""
+
+        self.addAction(self.actions.open_file)
+        self.addAction(self.actions.save_file)
+        self.addAction(self.actions.exit)
+        self.addAction(self.actions.about)
 
 
     def _create_menus(self) -> None:
@@ -81,3 +86,18 @@ class MainWindow(QMainWindow):
 
         menu_help = self.menuBar().addMenu("&Help")
         menu_help.addAction(self.actions.about)
+
+    def _create_toolbar(self) -> None:
+        """Create the main toolbar."""
+
+        toolbar = self.addToolBar("Main")
+
+        toolbar.setMovable(False)
+        toolbar.setFloatable(False)
+
+        toolbar.addAction(self.actions.open_file)
+        toolbar.addAction(self.actions.save_file)
+
+        toolbar.addSeparator()
+
+        toolbar.addAction(self.actions.about)
